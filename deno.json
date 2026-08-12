@@ -1,0 +1,66 @@
+{
+  "name": "@neabyte/autocompletion-vscode",
+  "description": "Autocompletion extension for VS Code",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "exports": "./src/index.ts",
+  "compilerOptions": {
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "checkJs": false,
+    "exactOptionalPropertyTypes": true,
+    "lib": ["deno.ns", "deno.window"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noErrorTruncation": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "useUnknownInCatchVariables": true
+  },
+  "fmt": {
+    "bracePosition": "sameLine",
+    "indentWidth": 2,
+    "lineWidth": 100,
+    "proseWrap": "preserve",
+    "semiColons": false,
+    "singleBodyPosition": "nextLine",
+    "singleQuote": true,
+    "spaceAround": false,
+    "spaceSurroundingProperties": true,
+    "trailingCommas": "never",
+    "useBraces": "always",
+    "useTabs": false
+  },
+  "lint": {
+    "include": ["src/"],
+    "rules": {
+      "tags": ["fresh", "jsr", "recommended"],
+      "exclude": ["no-console"]
+    }
+  },
+  "lock": true,
+  "nodeModulesDir": "auto",
+  "tasks": {
+    "check": "deno fmt src/ && deno lint src/ && deno check src/",
+    "bundle": "deno bundle src/index.ts -o out/extension.js"
+  },
+  "imports": {
+    "vscode": "npm:@types/vscode@^1.125.0"
+  },
+  "publish": {
+    "include": ["src/", "deno.json"]
+  }
+}

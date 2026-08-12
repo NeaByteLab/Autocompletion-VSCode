@@ -1,0 +1,40 @@
+{
+  "name": "autocompletion-vscode",
+  "displayName": "Autocompletion",
+  "description": "Autocompletion extension for VS Code",
+  "version": "0.1.0",
+  "publisher": "neabyte",
+  "author": {
+    "name": "NeaByteLab",
+    "email": "me@neabyte.com",
+    "url": "https://github.com/NeaByteLab"
+  },
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "scripts": {
+    "vscode:prepublish": "deno task bundle",
+    "vscode:build": "npx vsce package",
+    "vscode:install": "npm run vscode:build && code --install-extension $(ls *.vsix | head -1)",
+    "vscode:uninstall": "code --uninstall-extension neabyte.dev-suite",
+    "vscode:update": "npm run vscode:uninstall && npm run vscode:build && npm run vscode:install && npm run vscode:clean",
+    "vscode:clean": "rm -rf dist/ && rm -f *.vsix"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "autocompletion.hello",
+        "title": "Autocompletion: Hello"
+      }
+    ]
+  }
+}
