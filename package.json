@@ -1,7 +1,7 @@
 {
   "name": "autocompletion-vscode",
   "displayName": "Autocompletion",
-  "description": "Autocompletion extension for VS Code",
+  "description": "Next edit suggestions for VS Code using OpenAI-compatible APIs",
   "version": "0.1.0",
   "publisher": "neabyte",
   "author": {
@@ -10,6 +10,10 @@
     "url": "https://github.com/NeaByteLab"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NeaByteLab/Autocompletion-VSCode.git"
+  },
   "type": "module",
   "engines": {
     "vscode": "^1.85.0"
@@ -21,6 +25,9 @@
   "activationEvents": [
     "onStartupFinished"
   ],
+  "enabledApiProposals": [
+    "inlineCompletionsAdditions"
+  ],
   "scripts": {
     "vscode:prepublish": "deno task bundle",
     "vscode:build": "npx vsce package",
@@ -30,10 +37,57 @@
     "vscode:clean": "rm -rf dist/ && rm -f *.vsix"
   },
   "contributes": {
+    "configuration": {
+      "title": "Autocompletion",
+      "properties": {
+        "autocompletion.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable inline completion suggestions"
+        },
+        "autocompletion.api.url": {
+          "type": "string",
+          "default": "https://localhost:1234/v1/responses",
+          "description": "API endpoint URL for completion suggestions"
+        },
+        "autocompletion.api.model": {
+          "type": "string",
+          "default": "",
+          "description": "Model name for completion requests (e.g. deepseek-v4-flash)"
+        }
+      }
+    },
     "commands": [
       {
-        "command": "autocompletion.hello",
-        "title": "Autocompletion: Hello"
+        "command": "autocompletion.show",
+        "title": "Autocompletion: Show Options"
+      },
+      {
+        "command": "autocompletion.setApiUrl",
+        "title": "Autocompletion: Set API URL"
+      },
+      {
+        "command": "autocompletion.setApiModel",
+        "title": "Autocompletion: Set Model"
+      },
+      {
+        "command": "autocompletion.setApiKey",
+        "title": "Autocompletion: Set API Key"
+      },
+      {
+        "command": "autocompletion.clearApiKey",
+        "title": "Autocompletion: Clear API Key"
+      },
+      {
+        "command": "autocompletion.openSettings",
+        "title": "Autocompletion: Open Settings"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "autocompletion.openSettings",
+        "key": "ctrl+alt+,",
+        "mac": "cmd+alt+,"
       }
     ]
   }
