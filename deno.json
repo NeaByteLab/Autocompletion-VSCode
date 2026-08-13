@@ -1,6 +1,6 @@
 {
   "name": "@neabyte/autocompletion-vscode",
-  "description": "Autocompletion extension for VS Code",
+  "description": "Next edit suggestions for VS Code using OpenAI-compatible APIs",
   "version": "0.1.0",
   "type": "module",
   "license": "MIT",
@@ -55,10 +55,11 @@
   "nodeModulesDir": "auto",
   "tasks": {
     "check": "deno fmt src/ && deno lint src/ && deno check src/",
-    "bundle": "deno bundle src/index.ts -o out/extension.js"
+    "bundle": "deno bundle --external vscode src/index.ts -o out/extension.js"
   },
   "imports": {
-    "vscode": "npm:@types/vscode@^1.125.0"
+    "vscode": "npm:@types/vscode@^1.125.0",
+    "@app/": "./src/"
   },
   "publish": {
     "include": ["src/", "deno.json"]
